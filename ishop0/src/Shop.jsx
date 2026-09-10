@@ -4,7 +4,7 @@ function Shop(props) {
       <h2>{props.name}</h2>
       <p>Адрес: {props.address}</p>
     </div>
-  );
+  )
 }
 
-export default Shop;
+export default Shop

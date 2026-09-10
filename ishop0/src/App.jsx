@@ -1,11 +1,14 @@
-import Shop from './Shop';
+import Shop from './Shop'
 
 function App() {
+  var shopName = "Продукты"
+  var shopAddress = "Малиновка 4"
+
   return (
     <div>
-      <Shop name="Продукты" address="Малиновка 4" />
+      <Shop name={shopName} address={shopAddress} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
