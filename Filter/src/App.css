@@ -1,0 +1,6 @@
+.wordList {
+  height: 150px;
+  overflow-y: scroll;
+  border: 1px solid black;
+  width: 200px;
+}
