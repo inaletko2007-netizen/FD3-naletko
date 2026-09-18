@@ -1,0 +1,8 @@
+[
+  { "id": 1, "name": "Велосипед", "price": 30, "url": "/images/bicycle.jpg", "quantity": 20 },
+  { "id": 2, "name": "Ноутбук", "price": 45000, "url": "/images/laptop.jpg", "quantity": 15 },
+  { "id": 3, "name": "Мышь", "price": 800, "url": "/images/mouse.jpg", "quantity": 49 },
+  { "id": 4, "name": "Клавиатура", "price": 1500, "url": "/images/keyboard.jpg", "quantity": 8 },
+  { "id": 5, "name": "Наушники", "price": 2500, "url": "/images/hedphones.jpg", "quantity": 22 },
+  { "id": 6, "name": "Монитор", "price": 12000, "url": "/images/monitor.jpg", "quantity": 3 }
+]
