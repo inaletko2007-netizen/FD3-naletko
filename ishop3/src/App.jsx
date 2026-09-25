@@ -1,4 +1,4 @@
-import Shop from './Shop'
+import Shop from './components/Shop'
 
 function App() {
   return (

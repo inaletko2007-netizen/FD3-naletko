@@ -22,11 +22,11 @@ function Product(props) {
     <tr style={style} onClick={handleRowClick}>
       <td>{props.name}</td>
       <td>{props.price}</td>
-      <td>{props.url}</td>
+      <td><img src={props.url} width="80" /></td>
       <td>{props.quantity}</td>
       <td>
-        <button onClick={handleEditClick} disabled={props.buttonsDisabled}>Edit</button>
-        <button onClick={handleDeleteClick} disabled={props.buttonsDisabled}>Delete</button>
+        <button onClick={handleEditClick} disabled={props.buttonsDisabled}>Редактировать</button>
+        <button onClick={handleDeleteClick} disabled={props.buttonsDisabled}>Удалить</button>
       </td>
     </tr>
   )

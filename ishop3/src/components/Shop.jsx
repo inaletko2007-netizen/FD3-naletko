@@ -1,25 +1,25 @@
 import { useState } from 'react'
 import Product from './Product'
 import ProductCard from './ProductCard'
-import initialProducts from './products.json'
+import initialProducts from '../products.json'
 
 function validateProduct(values) {
   var errors = {}
 
   if (!values.name || values.name.trim() === '') {
-    errors.name = 'Please, fill the field. Value must be a string'
+    errors.name = 'Заполните поле. Значение должно быть строкой'
   }
 
   if (values.price === '' || isNaN(values.price) || Number(values.price) <= 0) {
-    errors.price = 'Price must be a positive number'
+    errors.price = 'Цена должна быть положительным числом'
   }
 
   if (!values.url || values.url.trim() === '') {
-    errors.url = 'Please, fill the field. Value must be a string'
+    errors.url = 'Заполните поле. Значение должно быть строкой'
   }
 
   if (values.quantity === '' || isNaN(values.quantity) || Number(values.quantity) < 0) {
-    errors.quantity = 'Quantity must be zero or a positive number'
+    errors.quantity = 'Количество должно быть нулём или положительным числом'
   }
 
   return errors
@@ -204,11 +204,11 @@ function Shop() {
       <table border="1">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>URL</th>
-            <th>Quantity</th>
-            <th>Control</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Фото</th>
+            <th>Количество</th>
+            <th>Управление</th>
           </tr>
         </thead>
         <tbody>
@@ -216,7 +216,7 @@ function Shop() {
         </tbody>
       </table>
 
-      <button onClick={handleNewClick} disabled={isLocked}>New</button>
+      <button onClick={handleNewClick} disabled={isLocked}>Новый</button>
 
       {editingId === 'new' ? (
         <ProductCard
