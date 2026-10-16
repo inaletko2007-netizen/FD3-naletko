@@ -8,11 +8,9 @@ export class Scales {
   }
 
   getSumScale(): number {
-    var sum = 0
-    for (var i = 0; i < this.products.length; i++) {
-      sum = sum + this.products[i].getScale()
-    }
-    return sum
+    return this.products.reduce(function(sum, product) {
+      return sum + product.getScale()
+    }, 0)
   }
 
   getNameList(): string[] {

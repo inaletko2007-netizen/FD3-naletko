@@ -39,7 +39,6 @@ var clientsSlice = createSlice({
     })
   }
 })
-
 export var addClient = clientsSlice.actions.addClient
 export var saveClient = clientsSlice.actions.saveClient
 export var deleteClient = clientsSlice.actions.deleteClient

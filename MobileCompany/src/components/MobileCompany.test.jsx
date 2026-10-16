@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, cleanup } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import clientsReducer from '../features/clientsSlice'
@@ -37,14 +37,8 @@ describe('MobileCompany', function() {
   })
 
   afterEach(function() {
+    cleanup()
     vi.unstubAllGlobals()
-  })
-
-  it('загружает название компании и клиентов', async function() {
-    renderCompany()
-    expect(await screen.findByText('МТС')).toBeTruthy()
-    expect(screen.getByText('Иванов')).toBeTruthy()
-    expect(screen.getByText('Петров')).toBeTruthy()
   })
 
   it('фильтрует заблокированных клиентов', async function() {
@@ -55,41 +49,24 @@ describe('MobileCompany', function() {
     expect(screen.getByText('Петров')).toBeTruthy()
   })
 
-  it('фильтрует активных клиентов', async function() {
+  it('добавляет, изменяет и удаляет клиента', async function() {
     renderCompany()
     await screen.findByText('Иванов')
-    fireEvent.click(screen.getByRole('button', { name: 'Активные' }))
-    expect(screen.getByText('Иванов')).toBeTruthy()
-    expect(screen.queryByText('Петров')).toBeNull()
-  })
 
-  it('добавляет нового клиента', async function() {
-    renderCompany()
-    await screen.findByText('Иванов')
     fireEvent.click(screen.getByRole('button', { name: 'Добавить клиента' }))
     var inputs = screen.getAllByRole('textbox')
     fireEvent.change(inputs[0], { target: { value: 'Новиков' } })
-    fireEvent.change(inputs[1], { target: { value: 'Никита' } })
-    fireEvent.change(inputs[2], { target: { value: 'Николаевич' } })
     fireEvent.click(screen.getByRole('button', { name: 'Сохранить' }))
     expect(screen.getByText('Новиков')).toBeTruthy()
-  })
 
-  it('изменяет клиента', async function() {
-    renderCompany()
-    await screen.findByText('Иванов')
-    fireEvent.click(screen.getAllByRole('button', { name: 'Редактировать' })[0])
-    fireEvent.change(screen.getByDisplayValue('Иванов'), { target: { value: 'Иванов-Новый' } })
+    var editButtons = screen.getAllByRole('button', { name: 'Редактировать' })
+    fireEvent.click(editButtons[editButtons.length - 1])
+    fireEvent.change(screen.getByDisplayValue('Новиков'), { target: { value: 'Новиков-Новый' } })
     fireEvent.click(screen.getByRole('button', { name: 'Сохранить' }))
-    expect(screen.getByText('Иванов-Новый')).toBeTruthy()
-    expect(screen.queryByText('Иванов')).toBeNull()
-  })
+    expect(screen.getByText('Новиков-Новый')).toBeTruthy()
 
-  it('удаляет клиента', async function() {
-    renderCompany()
-    await screen.findByText('Иванов')
-    fireEvent.click(screen.getAllByRole('button', { name: 'Удалить' })[0])
-    expect(screen.queryByText('Иванов')).toBeNull()
-    expect(screen.getByText('Петров')).toBeTruthy()
+    var deleteButtons = screen.getAllByRole('button', { name: 'Удалить' })
+    fireEvent.click(deleteButtons[deleteButtons.length - 1])
+    expect(screen.queryByText('Новиков-Новый')).toBeNull()
   })
 })

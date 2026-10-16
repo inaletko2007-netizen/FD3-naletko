@@ -23,10 +23,11 @@ function MobileCompany() {
   }, [dispatch])
 
   useEffect(function() {
-  var ids = clients.map(function(client) { return client.id })
-  var maxId = ids.length > 0 ? Math.max.apply(null, ids) : 0
-  nextIdRef.current = maxId + 1
-}, [clients])
+    var ids = clients.map(function(client) { return client.id })
+    var maxId = ids.length > 0 ? Math.max.apply(null, ids) : 0
+    nextIdRef.current = maxId + 1
+  }, [clients])
+
   var handleFilterChange = useCallback(function(value) {
     setFilter(value)
   }, [])
@@ -75,19 +76,18 @@ function MobileCompany() {
   var visibleClients = filterClients(clients, filter)
 
   var rows = visibleClients.map(function(client) {
-  return (
-    <MobileClient
-      key={client.id}
-      client={client}
-      isEditing={client.id === editingId}
-      onEdit={handleEdit}
-      onSave={handleSave}
-      onDelete={handleDelete}
-      onCancel={handleCancel}
-    />
-  )
-})
-
+    return (
+      <MobileClient
+        key={client.id}
+        client={client}
+        isEditing={client.id === editingId}
+        onEdit={handleEdit}
+        onSave={handleSave}
+        onDelete={handleDelete}
+        onCancel={handleCancel}
+      />
+    )
+  })
   return (
     <div>
       <h2>{companyName}</h2>
@@ -112,5 +112,4 @@ function MobileCompany() {
     </div>
   )
 }
-
 export default MobileCompany
